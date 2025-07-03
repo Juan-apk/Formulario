@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Asistencia - Ruddy & Ana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,300;0,400;1,300&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(to bottom, #fafbff 0%, #f0f2ff 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .form-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+        }
+
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            font-weight: 400;
+            color: #9aa5d1;
+            margin-bottom: 20px;
+            line-height: 1;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(154, 165, 209, 0.3);
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #9aa5d1;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-description {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+            font-style: italic;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .form-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #9aa5d1;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .required {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid rgba(154, 165, 209, 0.3);
+            border-radius: 20px;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: #333;
+            background: rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #9aa5d1;
+            box-shadow: 0 8px 25px rgba(154, 165, 209, 0.2);
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            border: 2px solid rgba(154, 165, 209, 0.3);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .radio-option:hover {
+            border-color: rgba(154, 165, 209, 0.6);
+            background: rgba(154, 165, 209, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(154, 165, 209, 0.15);
+        }
+
+        .radio-option.selected {
+            border-color: #9aa5d1;
+            background: rgba(154, 165, 209, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(154, 165, 209, 0.2);
+        }
+
+        .radio-input {
+            margin-right: 18px;
+            width: 22px;
+            height: 22px;
+            accent-color: #9aa5d1;
+        }
+
+        .radio-label {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: #333;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .conditional-field {
+            display: none;
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(154, 165, 209, 0.08);
+            border-radius: 20px;
+            border-left: 5px solid #9aa5d1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .conditional-field.show {
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .submit-button {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(135deg, #9aa5d1 0%, #87A7DA 100%);
+            color: white;
+            padding: 22px 40px;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(154, 165, 209, 0.4);
+            margin: 50px auto 0;
+            display: block;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(154, 165, 209, 0.5);
+        }
+
+        .submit-button:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .date-highlight {
+            color: #9aa5d1;
+            font-weight: 600;
+        }
+
+        .heart-decoration {
+            color: #9aa5d1;
+            font-size: 1.4rem;
+            margin: 0 15px;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(46, 204, 113, 0.1);
+            border: 3px solid #2ecc71;
+            border-radius: 30px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .error-message {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(231, 76, 60, 0.1);
+            border: 3px solid #e74c3c;
+            border-radius: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+        }
+
+        .error-message.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-title, .error-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            color: #2ecc71;
+        }
+
+        .error-title {
+            color: #e74c3c;
+        }
+
+        .success-text, .error-text {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .success-text {
+            color: #27ae60;
+        }
+
+        .error-text {
+            color: #c0392b;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .form-content {
+                max-width: 700px;
+            }
+            
+            .couple-names {
+                font-size: 3.5rem;
+            }
+            
+            .form-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .form-content {
+                max-width: 100%;
+            }
+            
+            .form-header {
+                margin-bottom: 40px;
+                padding: 20px 10px;
+            }
+
+            .couple-names {
+                font-size: 2.8rem;
+            }
+
+            .form-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            .form-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .form-group {
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+
+            .form-label {
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+            }
+
+            .form-input {
+                padding: 15px 20px;
+                font-size: 1rem;
+                border-radius: 15px;
+            }
+
+            .radio-option {
+                padding: 15px 20px;
+                border-radius: 15px;
+            }
+
+            .radio-input {
+                width: 20px;
+                height: 20px;
+                margin-right: 15px;
+            }
+
+            .radio-label {
+                font-size: 1rem;
+            }
+
+            .conditional-field {
+                padding: 20px;
+                border-radius: 15px;
+                margin-top: 20px;
+            }
+
+            .submit-button {
+                font-size: 1rem;
+                padding: 18px 30px;
+                border-radius: 50px;
+                margin-top: 40px;
+                max-width: 100%;
+            }
+
+            .success-message, .error-message {
+                padding: 30px 15px;
+                border-radius: 20px;
+                margin-top: 30px;
+            }
+
+            .success-title, .error-title {
+                font-size: 2.2rem;
+            }
+
+            .success-text, .error-text {
+                font-size: 1rem;
+            }
+
+            .heart-decoration {
+                font-size: 1.2rem;
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .couple-names {
+                font-size: 2.2rem;
+            }
+
+            .form-title {
+                font-size: 1.4rem;
+            }
+
+            .form-description {
+                font-size: 0.9rem;
+            }
+
+            .form-input {
+                padding: 12px 18px;
+                font-size: 0.95rem;
+            }
+
+            .radio-option {
+                padding: 12px 18px;
+            }
+
+            .radio-label {
+                font-size: 0.95rem;
+            }
+
+            .submit-button {
+                font-size: 0.9rem;
+                padding: 16px 25px;
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-content">
+        <div class="form-header">
+            <h1 class="couple-names">Ana & Ruddy</h1>
+            <h2 class="form-title">Confirmación de asistencia a nuestra boda</h2>
+            <p class="form-description">
+                ¡Estamos muy felices de compartir este día tan especial contigo!<br>
+                Por favor, confirma tu asistencia antes del <span class="date-highlight">15 de noviembre de 2025</span>.<br>
+                Tu respuesta nos ayudará a planificar mejor para hacer de este día algo inolvidable.
+                <span class="heart-decoration">♡</span>
+            </p>
+        </div>
+
+        <form id="rsvpForm">
+            <!-- Pregunta 1: Nombre completo -->
+            <div class="form-group">
+                <label for="fullName" class="form-label">
+                    Nombre completo del invitado <span class="required">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="fullName" 
+                    name="fullName" 
+                    class="form-input" 
+                    required
+                    placeholder="Ingrese su nombre completo"
+                >
+            </div>
+
+            <!-- Pregunta 2: ¿Asistirá a la boda? -->
+            <div class="form-group">
+                <label class="form-label">
+                    ¿Asistirá a la boda? <span class="required">*</span>
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option" onclick="selectRadio('attendance', 'yes')">
+                        <input type="radio" id="attendanceYes" name="attendance" value="yes" class="radio-input" required>
+                        <label for="attendanceYes" class="radio-label">Sí</label>
+                    </div>
+                    <div class="radio-option" onclick="selectRadio('attendance', 'no')">
+                        <input type="radio" id="attendanceNo" name="attendance" value="no" class="radio-input" required>
+                        <label for="attendanceNo" class="radio-label">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 3: ¿Vendrá acompañado? -->
+            <div class="form-group" id="companionGroup">
+    <label class="form-label">
+        ¿Vendrá acompañado? <span class="required">*</span>
+    </label>
+    <p style="font-size: 0.85rem; color: #666; margin-top: 5px; font-style: italic;">
+        Por favor, si no vienes acompañado, deja en blanco los campos de acompañantes.
+    </p>
+
+                <div class="radio-group">
+                    <div class="radio-option" onclick="selectRadio('companion', 'no')">
+                        <input type="radio" id="companionNo" name="companion" value="no" class="radio-input">
+                        <label for="companionNo" class="radio-label">No</label>
+                    </div>
+                    <div class="radio-option" onclick="selectRadio('companion', 'one')">
+                        <input type="radio" id="companionOne" name="companion" value="one" class="radio-input">
+                        <label for="companionOne" class="radio-label">Sí, con 1 persona</label>
+                    </div>
+                    <div class="radio-option" onclick="selectRadio('companion', 'multiple')">
+                        <input type="radio" id="companionMultiple" name="companion" value="multiple" class="radio-input">
+                        <label for="companionMultiple" class="radio-label">Sí, con 2 personas o más</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 4: Nombres de acompañantes (condicional) -->
+            <div class="conditional-field" id="companionNamesField">
+                <label for="companionNames" class="form-label">
+                    Por favor indique el/los nombre(s) de su(s) acompañante(s):
+                </label>
+                <textarea 
+                    id="companionNames" 
+                    name="companionNames" 
+                    class="form-input form-textarea"
+                    placeholder="Escriba aquí los nombres de sus acompañantes..."
+                ></textarea>
+            </div>
+
+            <!-- Pregunta 5: Confirmación de contacto -->
+            <div class="form-group" id="contactGroup">
+                <label class="form-label">
+                    Confirma el número de contacto (teléfono o correo) <span class="required">*</span>
+                </label>
+                <div class="contact-fields">
+                    <div class="contact-field">
+                        <label for="phone" class="form-label">Teléfono:</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            class="form-input phone-input"
+                            placeholder="(000)-000-0000"
+                            maxlength="14"
+                        >
+                    </div>
+                    <div class="contact-field">
+                        <label for="email" class="form-label">Correo electrónico:</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input"
+                            placeholder="ejemplo@correo.com"
+                        >
+                    </div>
+                    <div class="contact-note">
+                        <small>*Debe completar al menos un campo de contacto</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 6: Comentarios adicionales -->
+            <div class="form-group" id="commentsGroup">
+                <label for="comments" class="form-label">
+                    Comentarios adicionales o información que desees compartir con nosotros:
+                </label>
+                <textarea 
+                    id="comments" 
+                    name="comments" 
+                    class="form-input form-textarea"
+                    placeholder="Escriba aquí cualquier comentario o información adicional..."
+                ></textarea>
+            </div>
+
+            <!-- Número de contacto con ícono WhatsApp -->
+            <div class="form-group whatsapp-contact" style="text-align: center; margin-bottom: 40px;">
+            <a 
+                href="https://wa.me/18296356058" 
+                target="_blank" 
+                rel="noopener" 
+                aria-label="Contactar por WhatsApp"
+                style="
+                display: inline-flex; 
+                align-items: center; 
+                justify-content: center; 
+                gap: 12px; 
+                font-family: 'Montserrat', sans-serif; 
+                font-weight: 700; 
+                font-size: 1.1rem; 
+                color: #9aa5d1; 
+                text-decoration: none; 
+                padding: 12px 30px; 
+                border: 2px solid #9aa5d1; 
+                border-radius: 50px; 
+                box-shadow: 0 5px 15px rgba(154, 165, 209, 0.3); 
+                cursor: pointer;
+                user-select: none;
+                transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+                "
+                onmouseover="this.style.backgroundColor='#9aa5d1'; this.style.color='#fff'; this.querySelector('svg').style.fill='#fff'; this.style.boxShadow='0 8px 25px rgba(154, 165, 209, 0.6)'"
+                onmouseout="this.style.backgroundColor='transparent'; this.style.color='#9aa5d1'; this.querySelector('svg').style.fill='#9aa5d1'; this.style.boxShadow='0 5px 15px rgba(154, 165, 209, 0.3)'"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9aa5d1" width="28" height="28" style="vertical-align: middle;">
+                <path d="M20.52 3.48A11.883 11.883 0 0012.004 0C5.373 0 .01 5.373.01 12.004c0 2.114.556 4.177 1.61 5.998L0 24l6.255-1.604a11.927 11.927 0 005.75 1.488h.005c6.633 0 12.007-5.373 12.007-12.006a11.89 11.89 0 00-3.497-8.398zm-8.516 17.206a9.93 9.93 0 01-5.084-1.446l-.36-.214-3.71.953.99-3.617-.234-.374a9.97 9.97 0 011.509-12.742 9.93 9.93 0 0113.986 1.564 9.9 9.9 0 01-6.091 16.882zm5.36-7.32c-.295-.15-1.746-.86-2.016-.959-.27-.1-.467-.15-.664.15-.196.295-.76.959-.933 1.157-.172.196-.345.22-.64.074-.295-.147-1.245-.459-2.37-1.46-.875-.78-1.465-1.74-1.638-2.036-.172-.295-.018-.454.13-.6.133-.133.295-.345.442-.52.15-.172.2-.296.3-.494.1-.196.05-.368-.025-.52-.075-.147-.664-1.6-.91-2.19-.24-.574-.485-.5-.664-.51l-.567-.01c-.196 0-.514.074-.784.368-.27.295-1.03 1.007-1.03 2.45 0 1.444 1.055 2.843 1.2 3.04.147.196 2.075 3.164 5.028 4.433.703.303 1.25.484 1.678.62.704.226 1.345.194 1.852.118.565-.085 1.746-.713 1.993-1.403.248-.69.248-1.282.173-1.403-.074-.123-.27-.196-.564-.344z"/>
+                </svg>
+                <span style="line-height: 1;">+1 (829) 635-6058</span>
+            </a>
+            </div>
+
+
+            <button type="submit" class="submit-button" id="submitBtn">
+                Confirmar Asistencia
+            </button>
+        </form>
+
+        <!-- Mensaje de éxito -->
+        <div class="success-message" id="successMessage">
+            <div class="success-title">¡Gracias!</div>
+            <div class="success-text">
+                Tu confirmación ha sido enviada exitosamente.<br>
+                ¡Esperamos verte en nuestro día especial!
+            </div>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div class="error-message" id="errorMessage">
+            <div class="error-title">¡Oops!</div>
+            <div class="error-text" id="errorText">
+                Hubo un problema al enviar tu confirmación. Por favor, inténtalo de nuevo.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+// CONFIGURACIÓN - REEMPLAZA ESTA URL
+// ========================================
+// INSTRUCCIONES PARA CONFIGURAR:
+// 1. Ve a https://script.google.com/
+// 2. Crea un nuevo proyecto
+// 3. Pega el código del Google Apps Script que te proporcioné
+// 4. Implementa como aplicación web
+// 5. Copia la URL y pégala aquí:
+
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx71VuKQlhdWj3B8yNGI328z5K21GUY5_AI-hL2iah0gwBkkFVH9KdGpx7edgXSoRM5/exec';
+
+// ========================================
+// VARIABLES GLOBALES
+// ========================================
+let formSubmitted = false;
+let retryCount = 0;
+const MAX_RETRIES = 3;
+
+// ========================================
+// FUNCIONES DE INTERFAZ
+// ========================================
+
+function selectRadio(groupName, value) {
+    // Remover selección anterior
+    document.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
+        radio.closest('.radio-option').classList.remove('selected');
+    });
+    
+    // Seleccionar nueva opción
+    const selectedRadio = document.querySelector(`input[name="${groupName}"][value="${value}"]`);
+    if (selectedRadio) {
+        selectedRadio.checked = true;
+        selectedRadio.closest('.radio-option').classList.add('selected');
+        
+        // Mostrar campos condicionales
+        handleConditionalFields(groupName, value);
+        
+        // Validar formulario en tiempo real
+        validateForm();
+    }
+}
+
+function handleConditionalFields(groupName, value) {
+    if (groupName === 'attendance') {
+        const companionGroup = document.getElementById('companionGroup');
+        const contactGroup = document.getElementById('contactGroup');
+        const commentsGroup = document.getElementById('commentsGroup');
+        
+        if (value === 'yes') {
+            // Mostrar campos adicionales con animación
+            showElementWithAnimation(companionGroup);
+            showElementWithAnimation(contactGroup);
+            showElementWithAnimation(commentsGroup);
+            
+            // Hacer campos requeridos
+            const companionRadios = document.querySelectorAll('input[name="companion"]');
+            companionRadios.forEach(radio => radio.required = true);
+            
+            // Los campos de contacto se validan por separado
+        } else {
+            // Ocultar campos adicionales
+            hideElementWithAnimation(companionGroup);
+            hideElementWithAnimation(contactGroup);
+            hideElementWithAnimation(commentsGroup);
+            
+            // Remover requerimientos
+            const companionRadios = document.querySelectorAll('input[name="companion"]');
+            companionRadios.forEach(radio => {
+                radio.required = false;
+                radio.checked = false;
+                radio.closest('.radio-option').classList.remove('selected');
+            });
+            
+            // Ocultar campos condicionales también
+            document.getElementById('companionNamesField').classList.remove('show');
+            
+            // Limpiar campos
+            document.getElementById('companionNames').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('email').value = '';
+        }
+    }
+    
+    if (groupName === 'companion') {
+        const companionNamesField = document.getElementById('companionNamesField');
+        if (value === 'one' || value === 'multiple') {
+            companionNamesField.classList.add('show');
+            // Hacer el campo requerido si hay acompañantes
+            document.getElementById('companionNames').required = true;
+        } else {
+            companionNamesField.classList.remove('show');
+            document.getElementById('companionNames').required = false;
+            document.getElementById('companionNames').value = '';
+        }
+    }
+}
+
+function showElementWithAnimation(element) {
+    element.style.display = 'block';
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(-10px)';
+    
+    setTimeout(() => {
+        element.style.transition = 'all 0.3s ease';
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+    }, 10);
+}
+
+function hideElementWithAnimation(element) {
+    element.style.transition = 'all 0.3s ease';
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(-10px)';
+    
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 300);
+}
+
+// ========================================
+// FUNCIONES DE FORMATO DE TELÉFONO
+// ========================================
+
+function formatPhoneNumber(value) {
+    // Remover todos los caracteres que no sean números
+    const phoneNumber = value.replace(/\D/g, '');
+    
+    // Formatear como (000)-000-0000
+    if (phoneNumber.length >= 10) {
+        return `(${phoneNumber.slice(0, 3)})-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+    } else if (phoneNumber.length >= 6) {
+        return `(${phoneNumber.slice(0, 3)})-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6)}`;
+    } else if (phoneNumber.length >= 3) {
+        return `(${phoneNumber.slice(0, 3)})-${phoneNumber.slice(3)}`;
+    } else if (phoneNumber.length > 0) {
+        return `(${phoneNumber}`;
+    }
+    
+    return phoneNumber;
+}
+
+// ========================================
+// VALIDACIÓN DEL FORMULARIO
+// ========================================
+
+function validateForm() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const attendance = document.querySelector('input[name="attendance"]:checked');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    let isValid = fullName.length > 0 && attendance;
+    
+    // Si asiste, validar campos adicionales
+    if (attendance && attendance.value === 'yes') {
+        const companion = document.querySelector('input[name="companion"]:checked');
+        
+        isValid = isValid && companion;
+        
+        // Validar nombres de acompañantes si es necesario
+        if (companion && (companion.value === 'one' || companion.value === 'multiple')) {
+            const companionNames = document.getElementById('companionNames').value.trim();
+            isValid = isValid && companionNames.length > 0;
+        }
+        
+        // Validar que al menos un campo de contacto esté lleno
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        isValid = isValid && (phone.length > 0 || email.length > 0);
+    }
+    
+    // Habilitar/deshabilitar botón de envío
+    submitBtn.disabled = !isValid;
+    
+    return isValid;
+}
+
+function validateRequiredFields() {
+    const errors = [];
+    
+    // Validar nombre
+    const fullName = document.getElementById('fullName').value.trim();
+    if (!fullName) {
+        errors.push('El nombre completo es requerido');
+    }
+    
+    // Validar asistencia
+    const attendance = document.querySelector('input[name="attendance"]:checked');
+    if (!attendance) {
+        errors.push('Debe seleccionar si asistirá o no');
+    }
+    
+    // Si asiste, validar campos adicionales
+    if (attendance && attendance.value === 'yes') {
+        const companion = document.querySelector('input[name="companion"]:checked');
+        if (!companion) {
+            errors.push('Debe indicar si vendrá acompañado');
+        }
+        
+        // Validar nombres de acompañantes
+        if (companion && (companion.value === 'one' || companion.value === 'multiple')) {
+            const companionNames = document.getElementById('companionNames').value.trim();
+            if (!companionNames) {
+                errors.push('Debe indicar los nombres de sus acompañantes');
+            }
+        }
+        
+        // Validar contacto
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        if (!phone && !email) {
+            errors.push('Debe proporcionar al menos un método de contacto (teléfono o correo)');
+        }
+        
+        // Validar formato de email si se proporciona
+        if (email && !isValidEmail(email)) {
+            errors.push('El formato del correo electrónico no es válido');
+        }
+        
+        // Validar formato de teléfono si se proporciona
+        if (phone && !isValidPhone(phone)) {
+            errors.push('El formato del teléfono no es válido');
+        }
+    }
+    
+    return errors;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function isValidPhone(phone) {
+    const phoneRegex = /^\(\d{3}\)-\d{3}-\d{4}$/;
+    return phoneRegex.test(phone);
+}
+
+// ========================================
+// ENVÍO DEL FORMULARIO
+// ========================================
+
+async function submitForm(formData) {
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        // Como usamos no-cors, no podemos leer la respuesta
+        // Pero si no hay error, asumimos que fue exitoso
+        return { success: true };
+        
+    } catch (error) {
+        console.error('Error en submitForm:', error);
+        throw error;
+    }
+}
+
+async function handleFormSubmission(formElement) {
+    const submitBtn = document.getElementById('submitBtn');
+    const originalText = submitBtn.innerHTML;
+    
+    try {
+        // Validar antes de enviar
+        const validationErrors = validateRequiredFields();
+        if (validationErrors.length > 0) {
+            showError('Por favor complete todos los campos requeridos:\n' + validationErrors.join('\n'));
+            return;
+        }
+        
+        // Prevenir envío múltiple
+        if (formSubmitted) {
+            return;
+        }
+        
+        formSubmitted = true;
+        
+        // Mostrar loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span>Enviando...';
+        
+        // Recopilar datos del formulario
+        const formData = new FormData(formElement);
+        const data = collectFormData(formData);
+        
+        // Intentar enviar con reintentos
+        await submitWithRetry(data);
+        
+        // Mostrar mensaje de éxito
+        showSuccess();
+        
+    } catch (error) {
+        console.error('Error en handleFormSubmission:', error);
+        formSubmitted = false;
+        showError('Hubo un problema al enviar tu confirmación. Por favor, inténtalo de nuevo.');
+    } finally {
+        // Restaurar botón
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+    }
+}
+
+async function submitWithRetry(data, attempt = 1) {
+    try {
+        console.log(`Intento ${attempt} de envío...`);
+        await submitForm(data);
+        console.log('Formulario enviado exitosamente');
+    } catch (error) {
+        console.error(`Error en intento ${attempt}:`, error);
+        
+        if (attempt < MAX_RETRIES) {
+            console.log(`Reintentando en 2 segundos...`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return submitWithRetry(data, attempt + 1);
+        } else {
+            throw new Error(`Falló después de ${MAX_RETRIES} intentos`);
+        }
+    }
+}
+
+function collectFormData(formData) {
+    const data = {};
+    
+    // Campos básicos
+    data.fullName = formData.get('fullName')?.trim() || '';
+    data.attendance = formData.get('attendance') || '';
+    data.timestamp = new Date().toLocaleString('es-DO', {
+        timeZone: 'America/Santo_Domingo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+    
+    // Solo incluir otros campos si asiste
+    if (data.attendance === 'yes') {
+        data.companion = formData.get('companion') || '';
+        data.companionNames = formData.get('companionNames')?.trim() || '';
+        data.phone = formData.get('phone')?.trim() || '';
+        data.email = formData.get('email')?.trim() || '';
+        data.comments = formData.get('comments')?.trim() || '';
+    } else {
+        data.companion = 'N/A';
+        data.companionNames = 'N/A';
+        data.phone = 'N/A';
+        data.email = 'N/A';
+        data.comments = formData.get('comments')?.trim() || '';
+    }
+    
+    return data;
+}
+
+// ========================================
+// FUNCIONES DE MENSAJES
+// ========================================
+
+function showSuccess() {
+    document.getElementById('rsvpForm').style.display = 'none';
+    document.getElementById('successMessage').classList.add('show');
+    document.getElementById('errorMessage').classList.remove('show');
+    
+    // Scroll al mensaje de éxito
+    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+}
+
+function showError(message) {
+    document.getElementById('errorText').textContent = message;
+    document.getElementById('errorMessage').classList.add('show');
+    document.getElementById('successMessage').classList.remove('show');
+    
+    // Scroll al mensaje de error
+    document.getElementById('errorMessage').scrollIntoView({ behavior: 'smooth' });
+    
+    // Ocultar el error después de 10 segundos
+    setTimeout(() => {
+        document.getElementById('errorMessage').classList.remove('show');
+    }, 10000);
+}
+
+// ========================================
+// EVENT LISTENERS
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Ocultar campos condicionales inicialmente
+    document.getElementById('companionGroup').style.display = 'none';
+    document.getElementById('contactGroup').style.display = 'none';
+    document.getElementById('commentsGroup').style.display = 'none';
+    
+    // Agregar event listeners para validación en tiempo real
+    document.getElementById('fullName').addEventListener('input', validateForm);
+    
+    // Event listener para el formulario
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        handleFormSubmission(this);
+    });
+    
+    // Event listeners para los campos de texto en campos condicionales
+    document.getElementById('companionNames').addEventListener('input', validateForm);
+    document.getElementById('phone').addEventListener('input', function(e) {
+        e.target.value = formatPhoneNumber(e.target.value);
+        validateForm();
+    });
+    document.getElementById('email').addEventListener('input', validateForm);
+    
+    // Validación inicial
+    validateForm();
+    
+    console.log('Formulario RSVP inicializado correctamente');
+});
+
+// ========================================
+// FUNCIONES DE UTILIDAD
+// ========================================
+
+function resetForm() {
+    document.getElementById('rsvpForm').reset();
+    
+    // Remover todas las selecciones
+    document.querySelectorAll('.radio-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    
+    // Ocultar campos condicionales
+    document.getElementById('companionGroup').style.display = 'none';
+    document.getElementById('contactGroup').style.display = 'none';
+    document.getElementById('commentsGroup').style.display = 'none';
+    document.getElementById('companionNamesField').classList.remove('show');
+    
+    // Ocultar mensajes
+    document.getElementById('successMessage').classList.remove('show');
+    document.getElementById('errorMessage').classList.remove('show');
+    
+    // Mostrar formulario
+    document.getElementById('rsvpForm').style.display = 'block';
+    
+    // Resetear variables
+    formSubmitted = false;
+    retryCount = 0;
+    
+    // Validar formulario
+    validateForm();
+}
+
+// Función para debugging (opcional)
+function getFormData() {
+    const formData = new FormData(document.getElementById('rsvpForm'));
+    const data = collectFormData(formData);
+    console.log('Datos del formulario:', data);
+    return data;
+}
+
+// Exponer algunas funciones globalmente para debugging
+window.rsvpForm = {
+    resetForm,
+    getFormData,
+    validateForm,
+    validateRequiredFields
+};
+    </script>
+</body>
+</html>
